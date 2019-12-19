@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Video from './video';
 import Form from './FormInput';
-import Logo from '../assets/logo.png';
+import Logo from '../assets/logo.jpg';
 
 class landing extends Component {
   render() {
