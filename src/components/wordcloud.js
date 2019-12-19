@@ -28,4 +28,4 @@ class wordcloud extends Component {
   }
 }
 
-export default ReactDelayRender({ delay: 5000 })(wordcloud);
+export default ReactDelayRender({ delay: 1000 })(wordcloud);

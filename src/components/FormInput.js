@@ -2,20 +2,30 @@ import React, { Component } from 'react';
 import './FormInput';
 import Api from './Api/api';
 
+
 class Form extends Component {
+    
   state = {
+
     videoId: '2g811Eo7K8U',
     username: '',
     email: '',
     text: ''
   };
+  
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = e => {
     e.preventDefault();
+    
     Api.createComment(this.state)
-      .then(res => console.log(res.data))
+      .then(res => {
+        if(res){
+          window.location.replace('/wordcloud')
+        }
+      })
       .catch(error => console.log(error));
+     
   };
   render() {
     return (
