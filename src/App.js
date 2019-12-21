@@ -5,6 +5,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Landing from './components/landing';
 import Wordcloud from './components/wordcloud';
+import FormInput from './components/FormInput'
 
 
 

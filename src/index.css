@@ -15,9 +15,3 @@ body {
   height: 100vh !important;
 }
 
-.heading {
-  background-image: url("./assets/bg.jpg");
-  background-size: cover;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-blend-mode: overlay;
-}
