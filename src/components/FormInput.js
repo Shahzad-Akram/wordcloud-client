@@ -25,7 +25,7 @@ class Form extends Component {
       text
     };
     axios
-      .post('http://localhost:4000/resource/comment', {
+      .post('https://wordcloud-api-node.herokuapp.com/resource/comment', {
         resourceId,
         username,
         email,

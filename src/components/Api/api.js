@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const route = 'http://localhost:4000/resource/';
+const route = 'https://wordcloud-api-node.herokuapp.com/resource/';
 
 const createComment = comment => {
   return axios

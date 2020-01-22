@@ -15,7 +15,7 @@ class VideoGallery extends Component {
     show: false
   };
   componentDidMount() {
-    axios.get('http://localhost:4000/resource').then(res => {
+    axios.get('https://wordcloud-api-node.herokuapp.com/resource').then(res => {
       this.setState({ Gallery: res.data });
     });
   }
@@ -46,7 +46,7 @@ class VideoGallery extends Component {
     };
     console.log(data);
     axios
-      .post('http://localhost:4000/resource/create', {
+      .post('https://wordcloud-api-node.herokuapp.com/resource/create', {
         name,
         caption,
         url,

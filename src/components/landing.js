@@ -6,7 +6,6 @@ import Logo from '../assets/logo.jpg';
 class landing extends Component {
   render() {
     const gallery = this.props.location.state;
-    console.log(gallery);
     return (
       <div className='App'>
         <div className=' p-0 m-0  justify-content-center align-items-center '>
