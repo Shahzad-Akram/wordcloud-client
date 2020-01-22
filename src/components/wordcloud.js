@@ -7,10 +7,12 @@ class wordcloud extends Component {
   state = {
     wordCloud: []
   };
+
   componentDidMount() {
-    Api.getWordCloud('2g811Eo7K8U').then(res => {
+    const id = window.location.pathname.split('/')[1];
+    Api.getWordCloud(id).then(res => {
       this.setState({
-        wordCloud: res.data[0]
+        wordCloud: res.data.wordFrequency[0]
       });
     });
   }

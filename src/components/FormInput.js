@@ -1,33 +1,44 @@
 import React, { Component } from 'react';
 import './FormInput';
 import Api from './Api/api';
-
+import axios from 'axios';
 
 class Form extends Component {
-    
   state = {
-
-    videoId: '2g811Eo7K8U',
     username: '',
     email: '',
     text: ''
   };
-  
+
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = e => {
     e.preventDefault();
-    
-    Api.createComment(this.state)
+    const resourceId = this.props.id;
+
+    const username = this.state.username;
+    const email = this.state.email;
+    const text = this.state.text;
+    const data = {
+      username,
+      email,
+      text
+    };
+    axios
+      .post('http://localhost:4000/resource/comment', {
+        resourceId,
+        username,
+        email,
+        text
+      })
       .then(res => {
-        if(res){
-          window.location.replace('/wordcloud')
-        }
+        window.location.replace(`${resourceId}/wordcloud`);
       })
       .catch(error => console.log(error));
-     
   };
+
   render() {
+    console.log(this.props);
     return (
       <form className='form-container' onSubmit={this.onSubmit}>
         <div class='form-group'>
@@ -64,11 +75,10 @@ class Form extends Component {
             required
           />
         </div>
-      
-          <button type='submit' class='btn btn-warning btn-block'>
-            Submit
-          </button>
-      
+
+        <button type='submit' class='btn btn-warning btn-block'>
+          Submit
+        </button>
       </form>
     );
   }
