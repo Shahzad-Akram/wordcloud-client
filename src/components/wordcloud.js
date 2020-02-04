@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactWordcloud from 'react-wordcloud';
 import Api from './Api/api';
 import ReactDelayRender from 'react-delay-render';
+import { Link } from 'react-router-dom';
 
 class wordcloud extends Component {
   state = {
@@ -18,13 +19,17 @@ class wordcloud extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { wordCloud } = this.state;
+
     return (
       <div
         className={this.state.hidden}
         style={{ height: '100vh', width: '100%' }}
       >
-        <ReactWordcloud words={wordCloud} />
+        <Link to='/'>
+          <ReactWordcloud words={wordCloud} />
+        </Link>
       </div>
     );
   }

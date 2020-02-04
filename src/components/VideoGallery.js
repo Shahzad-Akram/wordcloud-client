@@ -75,9 +75,14 @@ class VideoGallery extends Component {
             <Modal.Title>Add Video</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <p>
+              Share A video of resonance in which you share or express through
+              words or embodiment of your resonance from the video the video
+              will then be added to “In-Bodied Memories Video Gallery”.
+            </p>
             <form className='form-container' onSubmit={this.onSubmit}>
               <div class='form-group'>
-                <label for='exampleInputEmail1'>Name</label>
+                <label for='exampleInputEmail1'>Video Name</label>
                 <input
                   name='name'
                   type='text'
@@ -87,7 +92,7 @@ class VideoGallery extends Component {
                 />
               </div>
               <div class='form-group'>
-                <label for='exampleInputPassword1'>Caption</label>
+                <label for='exampleInputPassword1'>Video Title</label>
                 <input
                   name='caption'
                   type='text'
@@ -105,6 +110,21 @@ class VideoGallery extends Component {
                   onChange={this.onChange}
                   required
                 />
+              </div>
+              <div class='form-check'>
+                <input
+                  type='checkbox'
+                  class='form-check-input'
+                  id='exampleCheck1'
+                />
+                <label class='form-check-label' for='exampleCheck1'>
+                  I give consent for my video to appear at the “In-Bodied
+                  Memories video Gallery”. I will not upload and video that
+                  could be offensive to others. I am aware videos are anonymous
+                  and that my video could be removed by the admin on my request
+                  or the request of others. But not immediately and I take for
+                  legal responsibility on the videos I upload to the gallery.
+                </label>
               </div>
               <Modal.Footer>
                 <button

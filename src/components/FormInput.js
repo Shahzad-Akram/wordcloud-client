@@ -7,10 +7,16 @@ class Form extends Component {
   state = {
     username: '',
     email: '',
+    see: '',
+    feel: '',
+    done: '',
     text: ''
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.see, this.state.feel, this.state.do);
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -18,7 +24,8 @@ class Form extends Component {
 
     const username = this.state.username;
     const email = this.state.email;
-    const text = this.state.text;
+    const text = this.state.see + ' ' + this.state.feel + ' ' + this.state.done;
+    console.log(text);
     const data = {
       username,
       email,
@@ -38,7 +45,6 @@ class Form extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <form className='form-container' onSubmit={this.onSubmit}>
         <div class='form-group'>
@@ -65,15 +71,37 @@ class Form extends Component {
             We'll never share your email with anyone else.
           </small>
         </div>
-        <div class='form-group'>
-          <label for='exampleInputEmail1'>Resonance</label>
-          <input
-            name='text'
-            type='text'
-            class='form-control'
-            onChange={this.onChange}
-            required
-          />
+        <div className='row'>
+          <div class='form-group col-sm'>
+            <label for='exampleInputEmail1'>I See</label>
+            <input
+              name='see'
+              type='text'
+              class='form-control'
+              onChange={this.onChange}
+              required
+            />
+          </div>
+          <div class='form-group col-sm'>
+            <label for='exampleInputEmail1'>I Feel</label>
+            <input
+              name='feel'
+              type='text'
+              class='form-control'
+              onChange={this.onChange}
+              required
+            />
+          </div>
+          <div class='form-group col-sm'>
+            <label for='exampleInputEmail1'>I Do</label>
+            <input
+              name='done'
+              type='text'
+              class='form-control'
+              onChange={this.onChange}
+              required
+            />
+          </div>
         </div>
 
         <button type='submit' class='btn btn-warning btn-block'>

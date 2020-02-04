@@ -4,6 +4,8 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import ImageUploader from 'react-images-upload';
+
 class Gallery extends Component {
   state = {
     Gallery: [],
@@ -11,7 +13,8 @@ class Gallery extends Component {
     caption: '',
     url: '',
     type: 'image',
-    show: false
+    show: false,
+    file: null
   };
   componentDidMount() {
     axios.get('https://wordcloud-api-node.herokuapp.com/resource').then(res => {
@@ -29,32 +32,44 @@ class Gallery extends Component {
       show: false
     });
   };
+  onDrop = event => {
+    this.setState({
+      url: event.target.files[0]
+    });
+  };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.name);
+  };
   onSubmit = e => {
     e.preventDefault();
     const name = this.state.name;
     const caption = this.state.caption;
-    const url = this.state.url;
     const type = this.state.type;
+    const formData = new FormData();
+    formData.append('resourceImg', this.state.url);
+    formData.append('name', name);
+    formData.append('caption', caption);
+    formData.append('type', type);
     const data = {
       name,
       caption,
-      url,
-      type
+      type,
+      url: this.state.url
     };
     console.log(data);
+    //https://wordcloud-api-node.herokuapp.com/resource/create
     axios
-      .post('https://wordcloud-api-node.herokuapp.com/resource/create', {
-        name,
-        caption,
-        url,
-        type
-      })
+      .post(
+        'https://wordcloud-api-node.herokuapp.com/resource/create',
+        formData
+      )
       .then(res => {
         console.log(res);
       })
       .catch(error => console.log(error));
+    this.handleClose();
   };
 
   render() {
@@ -71,12 +86,17 @@ class Gallery extends Component {
 
         <Modal show={show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Image</Modal.Title>
+            <Modal.Title>Upload Image</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <p>
+              Take/make of a body shape or of metaphoric nature that express and
+              embodies your resonance from the video and access the collective
+              “in-Bodied Memories Image Gallery”
+            </p>
             <form className='form-container' onSubmit={this.onSubmit}>
               <div class='form-group'>
-                <label for='exampleInputEmail1'>Name</label>
+                <label for='exampleInputEmail1'>Your Name</label>
                 <input
                   name='name'
                   type='text'
@@ -86,7 +106,7 @@ class Gallery extends Component {
                 />
               </div>
               <div class='form-group'>
-                <label for='exampleInputPassword1'>Caption</label>
+                <label for='exampleInputPassword1'>Image Title</label>
                 <input
                   name='caption'
                   type='text'
@@ -95,21 +115,31 @@ class Gallery extends Component {
                   required
                 />
               </div>
-              <div class='form-group'>
-                <label for='exampleInputEmail1'>URL</label>
+              <div class='form-check'>
                 <input
-                  name='url'
-                  type='text'
-                  class='form-control'
-                  onChange={this.onChange}
-                  required
+                  type='checkbox'
+                  class='form-check-input'
+                  id='exampleCheck1'
                 />
+                <label class='form-check-label' for='exampleCheck1'>
+                  I give consent for my image to appear at the “In-Bodied
+                  Memories Image Gallery”. I will not upload and image that
+                  could be offensive to others. I am aware images are anonymous
+                  and that my image could be removed by the admin on my request
+                  or the request of others. But not immediately and I take for
+                  legal responsibility on the images I upload to the gallery.
+                </label>
               </div>
+
+              <div class='form-group'>
+                <input type='file' onChange={this.onDrop} />
+              </div>
+
               <Modal.Footer>
                 <button
                   type='submit'
                   class='btn btn-primary '
-                  onClick={this.handleClose}
+                  // onClick={this.handleClose}
                 >
                   Submit
                 </button>
